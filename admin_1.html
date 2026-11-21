@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Gérer mes créations – Les Babioles d'Hassana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&amp;family=Fraunces:opsz,wght@9..144,600&amp;family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#FFF7F3;font-family:'DM Sans',system-ui,sans-serif;color:#2B1B21}
+.barre{background:#FFF7F3;border-bottom:1px solid #F1D9DF;position:sticky;top:0;z-index:5}
+.barre-in{max-width:760px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{font-family:'Great Vibes',cursive;font-size:30px;color:#2B1B21;text-decoration:none;white-space:nowrap}
+.logo i{font-style:normal;font-size:20px;color:#B0124F}
+main{max-width:760px;margin:0 auto;padding:24px 16px 80px}
+h1{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:26px;margin:0 0 6px}
+.sous{margin:0 0 20px;color:#5A4249;font-size:15px}
+.carte{background:#fff;border:1px solid #F1D9DF;border-radius:18px;padding:20px}
+label{display:block;font-weight:700;font-size:14px;margin:14px 0 6px}
+input[type=text],input[type=email],input[type=password],textarea{width:100%;font:inherit;font-size:16px;padding:12px 14px;border:1.5px solid #E2C6CE;border-radius:12px;background:#fff;color:#2B1B21}
+input:focus,textarea:focus{outline:3px solid #F6C2D4;border-color:#B0124F}
+textarea{min-height:90px;resize:vertical}
+.btn{white-space:nowrap;font:inherit;font-weight:700;font-size:15px;border:0;border-radius:999px;padding:12px 20px;cursor:pointer;min-height:44px}
+.btn-p{background:#B0124F;color:#fff}.btn-p:hover{background:#7E0C38}
+.btn-s{background:#fff;color:#2B1B21;border:1.5px solid #2B1B21}
+.btn-d{background:#fff;color:#A11236;border:1.5px solid #A11236}
+.btn-l{background:none;color:#5A4249;text-decoration:underline;padding:8px}
+.btn:disabled{opacity:.5;cursor:wait}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.msg{margin:12px 0 0;font-size:14px;padding:10px 12px;border-radius:10px}
+.msg.err{background:#FDE7EC;color:#8A0F2C}.msg.ok{background:#E6F4EA;color:#1E5E33}
+.entete-liste{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.liste{display:flex;flex-direction:column;gap:12px}
+.item{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #F1D9DF;border-radius:16px;padding:10px}
+.item img,.item .vide{width:72px;height:72px;border-radius:12px;object-fit:cover;flex:none;background:#F6E3E8}
+.item .txt{flex:1;min-width:0}
+.item .nom{font-weight:700;font-size:16px;margin:0 0 2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.item .prix{margin:0;color:#B0124F;font-size:14px;font-weight:700}
+.item .boutons{display:flex;align-items:center;gap:4px;flex:none}
+.ico{width:44px;height:44px;border-radius:12px;border:1px solid #E2C6CE;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#2B1B21}
+.ico:disabled{opacity:.3;cursor:default}
+.ordre{display:flex;flex-direction:column;gap:4px}
+.ordre .ico{width:36px;height:30px}
+.apercu{margin-top:10px;width:160px;height:160px;border-radius:14px;object-fit:cover;display:none;background:#F6E3E8}
+.aide{font-size:13px;color:#6B5259;margin:6px 0 0}
+[hidden]{display:none !important}
+@media (max-width:480px){.item .modif-txt{display:none}}
+</style>
+</head>
+<body>
+<header class="barre"><div class="barre-in">
+<a class="logo" href="index.html">Les Babioles <i>d'Hassana</i></a>
+<button id="deco" class="btn btn-l" type="button" hidden>Se déconnecter</button>
+</div></header>
+
+<main>
+<p id="non-config" class="msg err" hidden>Le fichier <strong>config.js</strong> n'est pas encore rempli (adresse et clé Supabase).</p>
+
+<!-- Connexion -->
+<section id="vue-connexion" hidden>
+<h1>Espace créatrice</h1>
+<p class="sous">Connectez-vous pour gérer vos créations.</p>
+<form id="form-connexion" class="carte">
+<label for="email">E-mail</label>
+<input id="email" type="email" autocomplete="username" required>
+<label for="mdp">Mot de passe</label>
+<input id="mdp" type="password" autocomplete="current-password" required>
+<div class="actions"><button class="btn btn-p" type="submit">Se connecter</button></div>
+<p id="msg-connexion" class="msg err" hidden></p>
+</form>
+</section>
+
+<!-- Liste -->
+<section id="vue-liste" hidden>
+<div class="entete-liste">
+<div><h1>Mes créations</h1><p class="sous" style="margin:0">Elles s'affichent dans cet ordre sur le site.</p></div>
+<button id="btn-ajouter" class="btn btn-p" type="button">+ Ajouter</button>
+</div>
+<p id="msg-liste" class="msg" hidden></p>
+<div id="liste" class="liste"></div>
+<p id="liste-vide" class="sous" hidden>Aucune création pour l'instant. Cliquez sur « + Ajouter ».</p>
+<p style="margin-top:24px"><a href="creations.html" target="_blank" rel="noopener">Voir la page Créations du site</a></p>
+</section>
+
+<!-- Formulaire -->
+<section id="vue-form" hidden>
+<h1 id="titre-form">Nouvelle création</h1>
+<p class="sous">Les champs avec * sont obligatoires.</p>
+<form id="form-creation" class="carte">
+<label for="f-nom">Nom de la création *</label>
+<input id="f-nom" type="text" maxlength="120" required>
+<label for="f-desc">Petit texte</label>
+<textarea id="f-desc" maxlength="600"></textarea>
+<label for="f-prix">Prix</label>
+<input id="f-prix" type="text" maxlength="40" placeholder="ex. 12 €">
+<label for="f-photo">Photo</label>
+<input id="f-photo" type="file" accept="image/jpeg,image/png,image/webp,image/heic">
+<p class="aide">Une photo du téléphone ou de la galerie. Elle est réduite automatiquement.</p>
+<img id="apercu" class="apercu" alt="Aperçu de la photo">
+<div class="actions">
+<button id="btn-enregistrer" class="btn btn-p" type="submit">Enregistrer</button>
+<button id="btn-annuler" class="btn btn-s" type="button">Annuler</button>
+<button id="btn-supprimer" class="btn btn-d" type="button" hidden>Supprimer</button>
+</div>
+<p id="msg-form" class="msg err" hidden></p>
+</form>
+</section>
+</main>
+
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  var cfg = window.BABIOLES || {};
+  var $ = function(id){ return document.getElementById(id); };
+  if (!cfg.SUPABASE_URL || cfg.SUPABASE_URL.indexOf('https://') !== 0 || !window.supabase) {
+    $('non-config').hidden = false; return;
+  }
+  var sb = window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY);
+  var BUCKET = 'photos';
+  var creations = [];
+  var enCours = null;       // création en cours de modification (null = nouvelle)
+  var photoChoisie = null;  // Blob prêt à envoyer
+
+  function montrer(vue){
+    ['vue-connexion','vue-liste','vue-form'].forEach(function(v){ $(v).hidden = (v !== vue); });
+    $('deco').hidden = (vue === 'vue-connexion');
+    window.scrollTo(0,0);
+  }
+  function message(id, texte, type){
+    var el = $(id); el.textContent = texte; el.className = 'msg ' + (type || 'err'); el.hidden = !texte;
+  }
+  function srcPhoto(p){
+    p = String(p || '');
+    if (/^https:\/\//.test(p)) return p;
+    return p.replace(/^\/+/, '').replace(/^(javascript|data):/i, '');
+  }
+  function cheminStockage(url){
+    // renvoie le chemin dans le dossier "photos" si la photo vient de Supabase
+    var mark = '/storage/v1/object/public/' + BUCKET + '/';
+    var i = String(url || '').indexOf(mark);
+    return i >= 0 ? decodeURIComponent(url.slice(i + mark.length)) : null;
+  }
+  function icone(d){
+    return '<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="' + d + '"></path></svg>';
+  }
+
+  // ---------- Connexion ----------
+  $('form-connexion').addEventListener('submit', async function(e){
+    e.preventDefault();
+    message('msg-connexion', '');
+    var b = e.submitter; if (b) b.disabled = true;
+    var r = await sb.auth.signInWithPassword({ email: $('email').value.trim(), password: $('mdp').value });
+    if (b) b.disabled = false;
+    if (r.error) { message('msg-connexion', 'E-mail ou mot de passe incorrect.'); return; }
+    $('mdp').value = '';
+    chargerListe();
+  });
+  $('deco').addEventListener('click', async function(){ await sb.auth.signOut(); montrer('vue-connexion'); });
+
+  // ---------- Liste ----------
+  async function chargerListe(){
+    montrer('vue-liste');
+    var r = await sb.from('creations').select('*').order('ordre', { ascending: true }).order('created_at', { ascending: true });
+    if (r.error) { message('msg-liste', 'Impossible de charger les créations.'); return; }
+    creations = r.data || [];
+    afficherListe();
+  }
+  function afficherListe(){
+    var box = $('liste'); box.innerHTML = '';
+    $('liste-vide').hidden = creations.length > 0;
+    creations.forEach(function(c, i){
+      var item = document.createElement('div'); item.className = 'item';
+      var img;
+      if (c.photo) { img = document.createElement('img'); img.src = srcPhoto(c.photo); img.alt = ''; }
+      else { img = document.createElement('div'); img.className = 'vide'; }
+      var txt = document.createElement('div'); txt.className = 'txt';
+      var nom = document.createElement('p'); nom.className = 'nom'; nom.textContent = c.nom;
+      var prix = document.createElement('p'); prix.className = 'prix'; prix.textContent = c.prix || '';
+      txt.appendChild(nom); txt.appendChild(prix);
+
+      var boutons = document.createElement('div'); boutons.className = 'boutons';
+      var ordre = document.createElement('div'); ordre.className = 'ordre';
+      var haut = document.createElement('button'); haut.type = 'button'; haut.className = 'ico';
+      haut.innerHTML = icone('m18 15-6-6-6 6'); haut.setAttribute('aria-label', 'Monter ' + c.nom); haut.disabled = (i === 0);
+      haut.onclick = function(){ deplacer(i, -1); };
+      var bas = document.createElement('button'); bas.type = 'button'; bas.className = 'ico';
+      bas.innerHTML = icone('m6 9 6 6 6-6'); bas.setAttribute('aria-label', 'Descendre ' + c.nom); bas.disabled = (i === creations.length - 1);
+      bas.onclick = function(){ deplacer(i, 1); };
+      ordre.appendChild(haut); ordre.appendChild(bas);
+      var modif = document.createElement('button'); modif.type = 'button'; modif.className = 'btn btn-s';
+      modif.innerHTML = '<span class="modif-txt">Modifier</span>';
+      modif.prepend(document.createRange().createContextualFragment(icone('M12 20h9M16.5 3.5a2.1 2.1 0 1 1 3 3L7 19l-4 1 1-4Z')));
+      modif.style.display = 'flex'; modif.style.alignItems = 'center'; modif.style.gap = '6px'; modif.style.padding = '10px 14px';
+      modif.setAttribute('aria-label', 'Modifier ' + c.nom);
+      modif.onclick = function(){ ouvrirForm(c); };
+      boutons.appendChild(ordre); boutons.appendChild(modif);
+
+      item.appendChild(img); item.appendChild(txt); item.appendChild(boutons);
+      box.appendChild(item);
+    });
+  }
+  async function deplacer(i, sens){
+    var j = i + sens; if (j < 0 || j >= creations.length) return;
+    var t = creations[i]; creations[i] = creations[j]; creations[j] = t;
+    afficherListe();
+    var maj = creations.map(function(c, k){ return sb.from('creations').update({ ordre: k }).eq('id', c.id); });
+    var res = await Promise.all(maj);
+    if (res.some(function(r){ return r.error; })) message('msg-liste', "L'ordre n'a pas pu être enregistré.");
+  }
+
+  // ---------- Formulaire ----------
+  $('btn-ajouter').addEventListener('click', function(){ ouvrirForm(null); });
+  $('btn-annuler').addEventListener('click', function(){ montrer('vue-liste'); });
+
+  function ouvrirForm(c){
+    enCours = c; photoChoisie = null;
+    $('form-creation').reset(); message('msg-form', '');
+    $('titre-form').textContent = c ? 'Modifier la création' : 'Nouvelle création';
+    $('btn-supprimer').hidden = !c;
+    $('f-nom').value = c ? c.nom : '';
+    $('f-desc').value = c ? (c.description || '') : '';
+    $('f-prix').value = c ? (c.prix || '') : '';
+    var ap = $('apercu');
+    if (c && c.photo) { ap.src = srcPhoto(c.photo); ap.style.display = 'block'; } else { ap.removeAttribute('src'); ap.style.display = 'none'; }
+    montrer('vue-form');
+  }
+
+  // réduit la photo (max 1400 px, JPEG) avant l'envoi
+  function reduire(fichier){
+    return new Promise(function(ok, ko){
+      var url = URL.createObjectURL(fichier); var im = new Image();
+      im.onload = function(){
+        var max = 1400, w = im.naturalWidth, h = im.naturalHeight, k = Math.min(1, max / Math.max(w, h));
+        var cv = document.createElement('canvas'); cv.width = Math.round(w * k); cv.height = Math.round(h * k);
+        cv.getContext('2d').drawImage(im, 0, 0, cv.width, cv.height);
+        URL.revokeObjectURL(url);
+        cv.toBlob(function(b){ b ? ok(b) : ko(); }, 'image/jpeg', 0.82);
+      };
+      im.onerror = function(){ URL.revokeObjectURL(url); ko(); };
+      im.src = url;
+    });
+  }
+  $('f-photo').addEventListener('change', async function(){
+    var f = this.files && this.files[0]; message('msg-form', '');
+    if (!f) return;
+    if (!/^image\//.test(f.type)) { message('msg-form', 'Ce fichier n’est pas une image.'); this.value = ''; return; }
+    try {
+      photoChoisie = await reduire(f);
+      var ap = $('apercu'); ap.src = URL.createObjectURL(photoChoisie); ap.style.display = 'block';
+    } catch (e) {
+      photoChoisie = null; this.value = '';
+      message('msg-form', 'Cette photo n’a pas pu être lue. Essayez une photo en JPEG ou PNG.');
+    }
+  });
+
+  $('form-creation').addEventListener('submit', async function(e){
+    e.preventDefault(); message('msg-form', '');
+    var nom = $('f-nom').value.trim();
+    if (!nom) { message('msg-form', 'Le nom est obligatoire.'); return; }
+    var btn = $('btn-enregistrer'); btn.disabled = true; btn.textContent = 'Enregistrement…';
+    try {
+      var donnees = { nom: nom, description: $('f-desc').value.trim(), prix: $('f-prix').value.trim() };
+      var anciennePhoto = enCours ? cheminStockage(enCours.photo) : null;
+      if (photoChoisie) {
+        var nomFichier = (crypto.randomUUID ? crypto.randomUUID() : String(Date.now())) + '.jpg';
+        var up = await sb.storage.from(BUCKET).upload(nomFichier, photoChoisie, { contentType: 'image/jpeg', upsert: false });
+        if (up.error) throw new Error('photo');
+        donnees.photo = sb.storage.from(BUCKET).getPublicUrl(nomFichier).data.publicUrl;
+      }
+      var r;
+      if (enCours) r = await sb.from('creations').update(donnees).eq('id', enCours.id);
+      else { donnees.ordre = creations.length; r = await sb.from('creations').insert(donnees); }
+      if (r.error) throw new Error('base');
+      if (photoChoisie && anciennePhoto) await sb.storage.from(BUCKET).remove([anciennePhoto]);
+      await chargerListe();
+      message('msg-liste', 'Enregistré ! Le site est à jour.', 'ok');
+    } catch (err) {
+      message('msg-form', err.message === 'photo' ? 'La photo n’a pas pu être envoyée.' : 'L’enregistrement a échoué. Vérifiez que vous êtes bien connectée.');
+    } finally {
+      btn.disabled = false; btn.textContent = 'Enregistrer';
+    }
+  });
+
+  $('btn-supprimer').addEventListener('click', async function(){
+    if (!enCours) return;
+    if (!confirm('Supprimer « ' + enCours.nom + ' » du site ? Cette action est définitive.')) return;
+    var photo = cheminStockage(enCours.photo);
+    var r = await sb.from('creations').delete().eq('id', enCours.id);
+    if (r.error) { message('msg-form', 'La suppression a échoué.'); return; }
+    if (photo) await sb.storage.from(BUCKET).remove([photo]);
+    await chargerListe();
+    message('msg-liste', 'Création supprimée.', 'ok');
+  });
+
+  // ---------- Démarrage ----------
+  sb.auth.getSession().then(function(r){
+    if (r.data && r.data.session) chargerListe(); else montrer('vue-connexion');
+  });
+})();
+</script>
+</body>
+</html>
