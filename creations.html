@@ -85,5 +85,27 @@
 </div>
 </div>
 </section><div class="appel"><a href="contact.html">Une idée ? Me contacter</a></div></main>
+<script src="config.js"></script>
+<script>
+(function(){
+  var cfg=window.BABIOLES||{};
+  if(!cfg.SUPABASE_URL||cfg.SUPABASE_URL.indexOf('http')!==0)return; // pas encore configuré : on garde les créations écrites dans la page
+  function esc(t){return String(t==null?'':t).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function chemin(p){p=String(p||'');if(/^https:\/\//.test(p))return p;return p.replace(/^\/+/,'').replace(/^(javascript|data):/i,'');}
+  fetch(cfg.SUPABASE_URL.replace(/\/$/,'')+'/rest/v1/creations?select=nom,description,prix,photo&order=ordre.asc,created_at.asc',
+    {headers:{apikey:cfg.SUPABASE_ANON_KEY}})
+  .then(function(r){if(!r.ok)throw 0;return r.json();})
+  .then(function(liste){
+    var g=document.getElementById('grille');if(!g||!Array.isArray(liste)||!liste.length)return;
+    g.innerHTML=liste.map(function(c){
+      var photo=c.photo?'<img src="'+esc(chemin(c.photo))+'" alt="'+esc(c.nom)+'" loading="lazy" style="width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 20px; display: block">':'';
+      var prix=c.prix?'<p style="margin: 0; font-weight: 700; color: #B0124F">'+esc(c.prix)+'</p>':'';
+      return '<article style="display: flex; flex-direction: column; gap: 12px">'+photo+
+        '<h3 style="margin: 0; font-family: \'Fraunces\', Georgia, serif; font-size: 22px; font-weight: 600">'+esc(c.nom)+'</h3>'+
+        '<p style="margin: 0; font-size: 16px; line-height: 1.5; color: #5A4249">'+esc(c.description)+'</p>'+prix+'</article>';
+    }).join('');
+  }).catch(function(){});
+})();
+</script>
 </body>
 </html>
