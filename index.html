@@ -20,27 +20,25 @@ a{color:#B0124F}a:hover{color:#7E0C38}
 #accueil-texte .decale{margin-left:0 !important}
 #accueil-texte .bas{margin-top:32px !important}
 #accueil svg g{filter:none}
+#creations{padding:56px 16px !important}
+#grille{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:20px 14px !important}
+#grille article{gap:6px !important}
+#grille img{aspect-ratio:1/1 !important;border-radius:14px !important}
+#grille h3{font-size:16px !important;line-height:1.2}
+#grille p{font-size:13px !important;line-height:1.4 !important}
 }
 </style>
-<style>html{scroll-behavior:smooth}header{position:sticky;top:0;z-index:10}</style>
+<style>
+html{scroll-behavior:smooth}
+#accueil{min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center}
+#accueil-texte{width:100%;box-sizing:border-box}
+section[id]{scroll-margin-top:72px}
+</style>
 </head>
 <body>
 <div style="font-family: 'DM Sans', system-ui, sans-serif; color: #2B1B21; background: #FFF7F3; min-height: 100vh">
 
-<header style="background: #FFF7F3; border-bottom: 1px solid #F1D9DF">
-<div id="entete" style="max-width: 1160px; margin: 0 auto; padding: 16px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 32px">
-<a id="logo" href="#accueil" style="text-decoration: none; color: #2B1B21; display: flex; align-items: baseline; gap: 8px">
-<span style="font-family: 'Great Vibes', cursive; font-size: 40px; line-height: 1">Les Babioles</span>
-<span style="font-family: 'Great Vibes', cursive; font-size: 26px; color: #B0124F">d'Hassana</span>
-</a>
-<nav id="menu" aria-label="Navigation principale" style="display: flex; flex-wrap: wrap; gap: 4px 24px; font-size: 16px; font-weight: 500">
-<a href="#creations" style="color: #2B1B21; text-decoration: none; padding: 12px 0">Créations</a>
-<a href="#personnalisation" style="color: #2B1B21; text-decoration: none; padding: 12px 0">Personnalisation</a>
-<a href="#comment" style="color: #2B1B21; text-decoration: none; padding: 12px 0">Comment ça marche</a>
-<a id="btn-contact" href="#contact" style="color: #FFFFFF; background: #B0124F; text-decoration: none; padding: 12px 20px; border-radius: 999px">Me contacter</a>
-</nav>
-</div>
-</header>
+
 
 <section id="accueil" style="position: relative; overflow: hidden; background: #F27DB6">
 <svg aria-hidden="true" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block"><defs><filter id="brosse" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.012 0.09" numOctaves="2" seed="4"></feTurbulence><feDisplacementMap in="SourceGraphic" scale="22"></feDisplacementMap></filter></defs><rect width="1440" height="760" fill="#F27DB6"></rect><g filter="url(#brosse)"><path d="M283 271 Q512 141 728 -39" stroke="#FBB4D2" stroke-width="22" stroke-linecap="round" fill="none" opacity="0.40"></path><path d="M86 219 Q292 71 446 -31" stroke="#FBB4D2" stroke-width="31" stroke-linecap="round" fill="none" opacity="0.56"></path><path d="M102 652 Q357 463 657 266" stroke="#EC6FA9" stroke-width="48" stroke-linecap="round" fill="none" opacity="0.37"></path><path d="M-60 485 Q116 350 344 204" stroke="#FBB4D2" stroke-width="48" stroke-linecap="round" fill="none" opacity="0.76"></path><path d="M850 448 Q1053 308 1257 165" stroke="#E8559A" stroke-width="21" stroke-linecap="round" fill="none" opacity="0.66"></path><path d="M1099 522 Q1388 317 1645 143" stroke="#F7A3CB" stroke-width="37" stroke-linecap="round" fill="none" opacity="0.75"></path><path d="M734 570 Q964 387 1262 203" stroke="#F59A6B" stroke-width="34" stroke-linecap="round" fill="none" opacity="0.65"></path><path d="M-3 424 Q276 250 546 42" stroke="#F4895E" stroke-width="24" stroke-linecap="round" fill="none" opacity="0.39"></path><path d="M1173 422 Q1367 333 1507 190" stroke="#E14C91" stroke-width="44" stroke-linecap="round" fill="none" opacity="0.58"></path><path d="M553 681 Q682 599 781 523" stroke="#F4895E" stroke-width="33" stroke-linecap="round" fill="none" opacity="0.64"></path><path d="M990 860 Q1126 717 1323 628" stroke="#F59A6B" stroke-width="40" stroke-linecap="round" fill="none" opacity="0.43"></path><path d="M1083 253 Q1204 145 1379 47" stroke="#E14C91" stroke-width="38" stroke-linecap="round" fill="none" opacity="0.60"></path><path d="M200 260 Q371 156 564 7" stroke="#F4895E" stroke-width="28" stroke-linecap="round" fill="none" opacity="0.56"></path><path d="M1424 271 Q1585 158 1694 83" stroke="#F7A3CB" stroke-width="30" stroke-linecap="round" fill="none" opacity="0.36"></path><path d="M207 267 Q424 128 610 -13" stroke="#F59A6B" stroke-width="30" stroke-linecap="round" fill="none" opacity="0.83"></path><path d="M812 691 Q939 616 1037 535" stroke="#E14C91" stroke-width="65" stroke-linecap="round" fill="none" opacity="0.83"></path><path d="M417 465 Q585 312 799 199" stroke="#F7A3CB" stroke-width="39" stroke-linecap="round" fill="none" opacity="0.38"></path><path d="M312 192 Q424 95 517 50" stroke="#E8559A" stroke-width="26" stroke-linecap="round" fill="none" opacity="0.82"></path><path d="M74 451 Q264 319 513 146" stroke="#FBB4D2" stroke-width="68" stroke-linecap="round" fill="none" opacity="0.53"></path><path d="M1488 523 Q1699 388 1871 256" stroke="#E8559A" stroke-width="22" stroke-linecap="round" fill="none" opacity="0.72"></path><path d="M946 563 Q1090 437 1226 368" stroke="#F59A6B" stroke-width="41" stroke-linecap="round" fill="none" opacity="0.42"></path><path d="M651 933 Q945 742 1174 569" stroke="#F59A6B" stroke-width="33" stroke-linecap="round" fill="none" opacity="0.61"></path><path d="M101 583 Q335 469 492 312" stroke="#FBB4D2" stroke-width="51" stroke-linecap="round" fill="none" opacity="0.76"></path><path d="M1151 805 Q1408 668 1629 472" stroke="#FBB4D2" stroke-width="30" stroke-linecap="round" fill="none" opacity="0.60"></path><path d="M1122 528 Q1295 461 1399 336" stroke="#F59A6B" stroke-width="30" stroke-linecap="round" fill="none" opacity="0.57"></path><path d="M1419 442 Q1561 371 1705 243" stroke="#F7A3CB" stroke-width="30" stroke-linecap="round" fill="none" opacity="0.52"></path><path d="M798 152 Q1082 -12 1339 -224" stroke="#F4895E" stroke-width="22" stroke-linecap="round" fill="none" opacity="0.39"></path><path d="M1108 750 Q1266 644 1490 485" stroke="#E14C91" stroke-width="27" stroke-linecap="round" fill="none" opacity="0.67"></path><path d="M999 521 Q1209 333 1479 187" stroke="#F7A3CB" stroke-width="22" stroke-linecap="round" fill="none" opacity="0.44"></path><path d="M1329 795 Q1446 708 1588 615" stroke="#EC6FA9" stroke-width="61" stroke-linecap="round" fill="none" opacity="0.68"></path><path d="M-64 161 Q189 -5 499 -230" stroke="#FBB4D2" stroke-width="52" stroke-linecap="round" fill="none" opacity="0.72"></path><path d="M51 849 Q165 760 266 699" stroke="#FBB4D2" stroke-width="29" stroke-linecap="round" fill="none" opacity="0.47"></path><path d="M454 255 Q750 68 995 -121" stroke="#EC6FA9" stroke-width="36" stroke-linecap="round" fill="none" opacity="0.68"></path><path d="M1189 853 Q1311 746 1442 676" stroke="#FBB4D2" stroke-width="26" stroke-linecap="round" fill="none" opacity="0.36"></path><path d="M-293 789 Q-194 707 -24 603" stroke="#F4895E" stroke-width="26" stroke-linecap="round" fill="none" opacity="0.41"></path><path d="M655 536 Q883 381 1147 194" stroke="#E8559A" stroke-width="64" stroke-linecap="round" fill="none" opacity="0.47"></path><path d="M614 599 Q894 437 1099 262" stroke="#EC6FA9" stroke-width="65" stroke-linecap="round" fill="none" opacity="0.51"></path><path d="M59 372 Q271 258 451 99" stroke="#FBB4D2" stroke-width="60" stroke-linecap="round" fill="none" opacity="0.82"></path><path d="M1396 358 Q1595 208 1807 72" stroke="#E14C91" stroke-width="67" stroke-linecap="round" fill="none" opacity="0.57"></path><path d="M269 687 Q482 540 632 435" stroke="#F59A6B" stroke-width="17" stroke-linecap="round" fill="none" opacity="0.74"></path><path d="M989 678 Q1154 583 1247 499" stroke="#EC6FA9" stroke-width="64" stroke-linecap="round" fill="none" opacity="0.46"></path><path d="M577 942 Q825 759 1089 586" stroke="#EC6FA9" stroke-width="26" stroke-linecap="round" fill="none" opacity="0.85"></path><path d="M342 224 Q473 95 682 -13" stroke="#EC6FA9" stroke-width="36" stroke-linecap="round" fill="none" opacity="0.57"></path><path d="M823 560 Q968 455 1052 401" stroke="#E14C91" stroke-width="69" stroke-linecap="round" fill="none" opacity="0.46"></path><path d="M189 875 Q358 799 461 686" stroke="#E14C91" stroke-width="57" stroke-linecap="round" fill="none" opacity="0.56"></path><path d="M165 269 Q420 98 710 -109" stroke="#F4895E" stroke-width="29" stroke-linecap="round" fill="none" opacity="0.51"></path></g></svg>
@@ -56,7 +54,23 @@ a{color:#B0124F}a:hover{color:#7E0C38}
 <a href="#creations" style="text-decoration: none; background: #FFFFFF; color: #141012; font-weight: 700; padding: 16px 28px; border-radius: 999px">Voir les créations</a>
 </div>
 </div>
+<a href="#creations" aria-label="Descendre vers les créations" style="position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%); width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; color: #141012"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></a>
 </section>
+
+<header style="background: #FFF7F3; border-bottom: 1px solid #F1D9DF; position: sticky; top: 0; z-index: 10">
+<div id="entete" style="max-width: 1160px; margin: 0 auto; padding: 16px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 32px">
+<a id="logo" href="#accueil" style="text-decoration: none; color: #2B1B21; display: flex; align-items: baseline; gap: 8px">
+<span style="font-family: 'Great Vibes', cursive; font-size: 40px; line-height: 1">Les Babioles</span>
+<span style="font-family: 'Great Vibes', cursive; font-size: 26px; color: #B0124F">d'Hassana</span>
+</a>
+<nav id="menu" aria-label="Navigation principale" style="display: flex; flex-wrap: wrap; gap: 4px 24px; font-size: 16px; font-weight: 500">
+<a href="#creations" style="color: #2B1B21; text-decoration: none; padding: 12px 0">Créations</a>
+<a href="#personnalisation" style="color: #2B1B21; text-decoration: none; padding: 12px 0">Personnalisation</a>
+<a href="#comment" style="color: #2B1B21; text-decoration: none; padding: 12px 0">Comment ça marche</a>
+<a id="btn-contact" href="#contact" style="color: #FFFFFF; background: #B0124F; text-decoration: none; padding: 12px 20px; border-radius: 999px">Me contacter</a>
+</nav>
+</div>
+</header>
 
 <section id="creations" style="background: #FFFFFF; padding: 80px 24px">
 <div style="max-width: 1160px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px">
@@ -64,7 +78,7 @@ a{color:#B0124F}a:hover{color:#7E0C38}
 <h2 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(2rem, 3.5vw, 2.8rem)">Les créations</h2>
 <p style="margin: 0; font-size: 18px; line-height: 1.6; color: #5A4249">Un aperçu de ce qui sort de l'atelier. Tout peut être fait dans d'autres tissus, couleurs ou tailles.</p>
 </div>
-<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 28px">
+<div id="grille" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 28px">
 
 <article style="display: flex; flex-direction: column; gap: 12px">
 <img src="pochette-couverts.jpg" alt="Pochette à couverts ouverte avec serviette rouge, fourchette, couteau et cuillère" style="width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 20px; display: block">
